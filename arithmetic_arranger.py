@@ -18,6 +18,10 @@ def arithmetic_arranger(problems, get_results=False):
   first_operands_string, second_operands_string, dashes_string, results_string = stringifier(first_operands, operators, second_operands, results)
 
   arranged_problems = f"{first_operands_string}\n{second_operands_string}\n{dashes_string}"
+ 
+  if get_results:
+    arranged_problems += f"\n{results_string}"
+  
   return arranged_problems
 
 def problems_parser(problems):
@@ -66,7 +70,7 @@ def stringifier(first_operands, operators, second_operands, results):
   first_operands_string = ""
   second_operands_string = ""
   dashes_string = ""
-  results = ""
+  results_string = ""
   for i in range(len(first_operands)):
     first_operand = str(first_operands[i])
     second_operand = str(second_operands[i])
@@ -83,6 +87,9 @@ def stringifier(first_operands, operators, second_operands, results):
       
       dashes = '-' * (len(first_operand) + 2)
       dashes_string += f"{dashes}"
+      if len(results) != 0:
+        space_before_result = ' ' * (len(first_operand) - len(str(results[i])) + 2)
+        results_string += f"{space_before_result}{results[i]}"
     else:
       space_before_first = ' ' * (second_first + 2)
       first_operands_string += f"{space_before_first}{first_operand}"
@@ -91,10 +98,13 @@ def stringifier(first_operands, operators, second_operands, results):
       
       dashes = '-' * (len(second_operand) + 2)
       dashes_string += f"{dashes}"
+      if len(results) != 0:
+        space_before_result = ' ' * (len(second_operand) - len(str(results[i])) + 2)
+        results_string += f"{space_before_result}{results[i]}"
     
     if i != len(first_operands) - 1:
       first_operands_string += "    "
       second_operands_string += "    "
       dashes_string += "    "
-      # results += "    "
-  return first_operands_string, second_operands_string, dashes_string, results
+      results_string += "    "
+  return first_operands_string, second_operands_string, dashes_string, results_string
