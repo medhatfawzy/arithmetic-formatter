@@ -37,7 +37,7 @@ def problems_parser(problems):
         operator_index = problem.find(operator)
         if operator_index != -1: 
             break
-
+ 
     try:  
       first_operand, second_operand = problem.split(problem[operator_index])
     except:
